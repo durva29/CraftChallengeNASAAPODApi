@@ -8,6 +8,7 @@ This project tests NASA APOD(Astronomy Picture of the Day) API related test case
 * [APOD - start_date And end_date](#apd-startenddate)
 * [APOD - count](#apd-count)
 * [APOD - thumbs](#apd-thumbs)
+* [APOD - concept_tags](#apd-concepttags)
 * [Setup](#setup)
 
 ## API Information
@@ -19,6 +20,7 @@ API URL: GET https://api.nasa.gov/planetary/apod
 * end_date (YYYY-MM-DD)
 * count (Positive number between 1 t0o 100)
 * thumbs (True or False)
+* concept_tags (True or False) - Note: This functionality is disabled in the sevrice.
 
 ## APOD - api_key
 Retrive the APOD metadata of current date (default).
@@ -60,10 +62,17 @@ GET https://api.nasa.gov/planetary/apod?api_key=API_KEY&count=COUNT
 
 ## APOD - thumbs
 Return the URL of video thumbnail. If an APOD is not a video, this parameter is ignored.
-GET https://api.nasa.gov/planetary/apod?api_key=api_key&date=2021-10-06&thumbs=true
+GET https://api.nasa.gov/planetary/apod?api_key=api_key&date=DATE&thumbs=true
 #### Below Test cases for the thumbs are covered in ApiTest.ThumbsTest class
 * thumbs value as true with date and api_key
 * thumbs value as false with date and API KEY
+
+## APOD - concept_tags
+Return "concept_tags functionality turned off in current service" message when using this tag as this functionality is disabled in the service.
+GET https://api.nasa.gov/planetary/apod?api_key=api_key&date=DATE&concept_tags=true
+#### Below Test cases for the concept_tags are covered in ApiTest.ConceptTagsTest class
+* concept_tags as true with the API KEY
+* Without conecpt_tags with the API KEY
 
 ## Technologies
 Project is created with:
