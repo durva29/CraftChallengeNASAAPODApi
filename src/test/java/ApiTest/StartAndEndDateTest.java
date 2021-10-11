@@ -51,7 +51,7 @@ public class StartAndEndDateTest extends BaseSetUp {
   // end_date greater than today's date for the APOD Image with API KEY
   @Test
   public void endDateGreaterThanTodaysDate() {
-    Response response = given().param("api_key", API_KEY).param("start_date", "2021-10-06").param("end_date", "2021-10-11").when().get(APOD_URL);
+    Response response = given().param("api_key", API_KEY).param("start_date", "2021-10-06").param("end_date", FUTURE_DATE_OF_THE_APOD_IMAGE).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
     validatableResponse.contentType(ContentType.JSON);
