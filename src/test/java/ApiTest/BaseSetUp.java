@@ -16,4 +16,5 @@ public abstract class BaseSetUp {
   protected static final String THUMBS_DATE_APOD_VIDEO = "2021-09-28";
   protected static final String INVALID_DATEFORMAT_ERROR = "does not match format '%Y-%m-%d'";
   protected static final String DATERANGE_ERROR = "Date must be between Jun 16, 1995 and ";
+  protected static final String CONCEPTTAGS_TURNEDOFF_MSG = "concept_tags functionality turned off in current service";
 }
