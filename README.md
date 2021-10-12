@@ -18,7 +18,7 @@ API URL: GET https://api.nasa.gov/planetary/apod
 * date (YYYY-MM-DD)
 * start_date (YYYY-MM-DD)
 * end_date (YYYY-MM-DD)
-* count (Positive number between 1 t0o 100)
+* count (Positive number between 1 to 100)
 * thumbs (True or False)
 * concept_tags (True or False) - Note: This functionality is disabled in the sevrice.
 
