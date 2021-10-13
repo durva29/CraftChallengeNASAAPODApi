@@ -41,7 +41,7 @@ public class StartAndEndDateTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("start_date", DATE_OF_THE_APOD_IMAGE).param("end_date", TODAYS_DATE_OF_THE_APOD_IMAGE).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_OK);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body(
     		"date[0]", Matchers.equalTo(DATE_OF_THE_APOD_IMAGE),
     		"date", hasItems(DATE_OF_THE_APOD_IMAGE, TODAYS_DATE_OF_THE_APOD_IMAGE)
@@ -54,7 +54,7 @@ public class StartAndEndDateTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("start_date", "2021-10-06").param("end_date", FUTURE_DATE_OF_THE_APOD_IMAGE).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body(
     		"$", hasKey("msg"),
     		"msg", containsString(DATERANGE_ERROR),
@@ -68,7 +68,7 @@ public class StartAndEndDateTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("date", TODAYS_DATE_OF_THE_APOD_IMAGE).param("start_date", DATE_OF_THE_APOD_IMAGE).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body(
     		"$", hasKey("msg"),
     		"msg", containsString(INVALID_COMBINATION_PARAM_ERROR),
@@ -82,7 +82,7 @@ public class StartAndEndDateTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("end_date", TODAYS_DATE_OF_THE_APOD_IMAGE).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body(
     		"$", hasKey("msg"),
     		"msg",containsString(INVALID_COMBINATION_PARAM_ERROR),
@@ -96,7 +96,7 @@ public class StartAndEndDateTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("end_date", INVALID_DATEFORMAT_OF_THE_APOD_IMAGE).param("start_date", DATE_OF_THE_APOD_IMAGE).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body(
     		"$", hasKey("msg"),
     		"msg", containsString(INVALID_DATEFORMAT_ERROR),

@@ -24,8 +24,9 @@ public class ApiKeyTest extends BaseSetUp {
 		Response response = given().param("api_key", API_KEY).when().get(APOD_URL);
 		ValidatableResponse validatableResponse = response.then();
 		validatableResponse.assertThat().statusCode(HttpStatus.SC_OK);
-		validatableResponse.contentType(ContentType.JSON);
+		validatableResponse.assertThat().contentType(ContentType.JSON);
 		validatableResponse.body(
+				"$", hasKey("date"),
 				"date", Matchers.equalTo(TODAYS_DATE_OF_THE_APOD_IMAGE),
 				"$", hasKey("copyright"),
 				"$", hasKey("explanation"),

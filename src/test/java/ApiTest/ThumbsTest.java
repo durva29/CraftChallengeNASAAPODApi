@@ -25,7 +25,7 @@ public class ThumbsTest extends BaseSetUp {
 	    Response response = given().param("api_key", API_KEY).param("date", THUMBS_DATE_APOD_VIDEO).param("thumbs", true).when().get(APOD_URL);
 	    ValidatableResponse validatableResponse = response.then();
 	    validatableResponse.assertThat().statusCode(HttpStatus.SC_OK);
-	    validatableResponse.contentType(ContentType.JSON);
+	    validatableResponse.assertThat().contentType(ContentType.JSON);
 	    validatableResponse.body(
 	    		"$", hasKey("date"),
 	    		"date", Matchers.equalTo(THUMBS_DATE_APOD_VIDEO),
@@ -51,7 +51,7 @@ public class ThumbsTest extends BaseSetUp {
 	    Response response = given().param("api_key", API_KEY).param("date", THUMBS_DATE_APOD_VIDEO).param("thumbs", false	).when().get(APOD_URL);
 	    ValidatableResponse validatableResponse = response.then();
 	    validatableResponse.assertThat().statusCode(HttpStatus.SC_OK);
-	    validatableResponse.contentType(ContentType.JSON);
+	    validatableResponse.assertThat().contentType(ContentType.JSON);
 	    validatableResponse.body(
 	    		"$", hasKey("date"),
 	    		"date", Matchers.equalTo(THUMBS_DATE_APOD_VIDEO),

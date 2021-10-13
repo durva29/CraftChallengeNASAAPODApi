@@ -25,7 +25,7 @@ public class ConceptTagsTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("date", THUMBS_DATE_APOD_VIDEO).param("concept_tags", true).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_OK);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body(
     		"$", hasKey("concepts"),
     		"concepts", Matchers.equalTo(CONCEPTTAGS_TURNEDOFF_MSG),
@@ -52,7 +52,7 @@ public class ConceptTagsTest extends BaseSetUp {
    Response response = given().param("api_key", API_KEY).param("date", THUMBS_DATE_APOD_VIDEO).when().get(APOD_URL);
    ValidatableResponse validatableResponse = response.then();
    validatableResponse.assertThat().statusCode(HttpStatus.SC_OK);
-   validatableResponse.contentType(ContentType.JSON);
+   validatableResponse.assertThat().contentType(ContentType.JSON);
    validatableResponse.body(
    		"$", not(hasKey("concepts")),
    		"$", hasKey("date"),

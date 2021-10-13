@@ -25,7 +25,7 @@ public class DateTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("date", DATE_OF_THE_APOD_IMAGE).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_OK);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body(
     		"date", Matchers.equalTo(DATE_OF_THE_APOD_IMAGE),
     		"$", hasKey("copyright"),
@@ -54,7 +54,7 @@ public class DateTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("date", INVALID_DATEFORMAT_OF_THE_APOD_IMAGE).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body(
     		"$", hasKey("msg"),
     		"msg", containsString(INVALID_DATEFORMAT_ERROR),
@@ -68,7 +68,7 @@ public class DateTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("date", FUTURE_DATE_OF_THE_APOD_IMAGE).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body(
     		"$", hasKey("msg"),
     		"msg", containsString(DATERANGE_ERROR),

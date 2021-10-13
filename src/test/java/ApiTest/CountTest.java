@@ -25,7 +25,7 @@ public class CountTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("count", 2).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_OK);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body("size()", greaterThan(0));
   }
 
@@ -35,7 +35,7 @@ public class CountTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("count", 0).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body(
     		"$", hasKey("msg"),
     		"msg", containsString(COUNT_IN_RANGE_ERROR),
@@ -49,7 +49,7 @@ public class CountTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("count", -10).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body(
     		"$", hasKey("msg"),
     		"msg", containsString(COUNT_IN_RANGE_ERROR),
@@ -63,7 +63,7 @@ public class CountTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("count", 101).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body(
     		"$", hasKey("msg"),
     		"msg", containsString(COUNT_IN_RANGE_ERROR),
@@ -77,7 +77,7 @@ public class CountTest extends BaseSetUp {
     Response response = given().param("api_key", API_KEY).param("end_date", INVALID_DATEFORMAT_OF_THE_APOD_IMAGE).param("start_date", DATE_OF_THE_APOD_IMAGE).param("count", 2).when().get(APOD_URL);
     ValidatableResponse validatableResponse = response.then();
     validatableResponse.assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
-    validatableResponse.contentType(ContentType.JSON);
+    validatableResponse.assertThat().contentType(ContentType.JSON);
     validatableResponse.body(
     		"$", hasKey("msg"),
     		"msg", containsString(INVALID_COMBINATION_PARAM_ERROR),
